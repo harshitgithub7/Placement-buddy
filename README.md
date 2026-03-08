@@ -8,9 +8,17 @@ The system helps students track company opportunities, apply for roles, optimize
 # Project Structure
 placement-buddy
 │
+
+
 ├── backend
+
+
 ├── frontend
+
+
 ├── database
+
+
 └── docs
 
 
