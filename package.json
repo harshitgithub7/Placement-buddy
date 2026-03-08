@@ -1,6 +1,39 @@
 {
+  "name": "placement-buddy",
+  "version": "1.0.0",
+  "description": "Placement Buddy is a platform designed to improve communication between the Training & Placement Office (TPO) and students, while enabling students to learn from alumni and professors with industry experience.",
+  "main": "index.js",
+  "type": "commonjs",
+
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "preview": "npm run preview --prefix frontend",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
   "dependencies": {
     "axios": "^1.13.6",
     "react-router-dom": "^7.13.1"
-  }
+  },
+
+  "devDependencies": {},
+
+  "directories": {
+    "doc": "docs"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshitgithub7/Placement-buddy.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/harshitgithub7/Placement-buddy/issues"
+  },
+
+  "homepage": "https://github.com/harshitgithub7/Placement-buddy#readme",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
