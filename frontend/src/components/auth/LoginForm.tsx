@@ -1,31 +1,50 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import "./LoginForm.css";
+
 const LoginForm = () => {
+  const [role, setRole] = useState<string>("student");
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // Save role in context + localStorage
+    login(role);
+
+    // Redirect based on role
+    if (role === "student") {
+      navigate("/student");
+    } else if (role === "tpo") {
+      navigate("/tpo");
+    } else if (role === "professor") {
+      navigate("/professor");
+    }
+  };
 
   return (
+    <div className="login-container">
+     <div className="login-card">
+        <h2>Placement Buddy</h2>
+        <p>Select your role to continue</p>
 
-    <form className="flex flex-col gap-4">
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          className="login-select"
+        >
+          <option value="student">Student</option>
+          <option value="tpo">TPO</option>
+          <option value="professor">Professor</option>
+          <option value="alumni">Alumni</option>
+        </select>
 
-      <h2 className="text-2xl font-bold text-center">
-        Login
-      </h2>
+        <button onClick={handleLogin} className="login-btn">
+           Login
+        </button>
+      </div>
+  </div>
+);
+};
 
-      <input
-        type="email"
-        placeholder="University Email"
-        className="border p-2 rounded"
-      />
-
-      <input
-        type="password"
-        placeholder="Password"
-        className="border p-2 rounded"
-      />
-
-      <button className="bg-blue-900 text-white p-2 rounded">
-        Login
-      </button>
-
-    </form>
-  )
-}
-
-export default LoginForm
+export default LoginForm;
