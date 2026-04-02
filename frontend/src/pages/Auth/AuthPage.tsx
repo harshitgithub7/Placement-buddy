@@ -1,49 +1,25 @@
-import { useState } from "react"
-import LoginForm from "../../components/auth/LoginForm"
-import SignupForm from "../../components/auth/SignupForm"
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import LoginForm from "../../components/auth/LoginForm";
 
 const AuthPage = () => {
+  const { isAuthenticated, role } = useAuth();
+  const navigate = useNavigate();
 
-  const [isLogin, setIsLogin] = useState(true)
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (role === "student") {
+        navigate("/student");
+      } else if (role === "tpo") {
+        navigate("/tpo");
+      } else if (role === "professor") {
+        navigate("/professor");
+      }
+    }
+  }, [isAuthenticated, role, navigate]);
 
-  return (
+  return <LoginForm />;
+};
 
-    <div className="min-h-screen flex">
-
-      <div className="w-1/2 bg-blue-900 text-white flex items-center justify-center">
-
-        <h1 className="text-4xl font-bold">
-          Placement Buddy
-        </h1>
-
-      </div>
-
-      <div className="w-1/2 flex items-center justify-center">
-
-        <div className="bg-white shadow-lg p-8 rounded-lg w-96">
-
-          {isLogin ? <LoginForm /> : <SignupForm />}
-
-          <div className="text-center mt-4">
-
-            {isLogin ? (
-              <button onClick={() => setIsLogin(false)}>
-                Create account
-              </button>
-            ) : (
-              <button onClick={() => setIsLogin(true)}>
-                Already have account
-              </button>
-            )}
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  )
-}
-
-export default AuthPage
+export default AuthPage;

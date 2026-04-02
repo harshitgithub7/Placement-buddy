@@ -1,23 +1,55 @@
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 const Topbar = () => {
+  const { role, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
-    <div style={{
-      height:"60px",
-      background:"#f1f5f9",
-      display:"flex",
-      alignItems:"center",
-      justifyContent:"space-between",
-      padding:"0 20px",
-      borderBottom:"1px solid #ddd"
-    }}>
+    <div style={styles.topbar}>
+      <h3>Placement Buddy</h3>
 
-      <h3>Dashboard</h3>
-
-      <div>
-        <span>User Profile</span>
+      <div style={styles.right}>
+        <span style={styles.role}>{role?.toUpperCase()}</span>
+        <button onClick={handleLogout} style={styles.logoutBtn}>
+          Logout
+        </button>
       </div>
-
     </div>
   );
 };
 
 export default Topbar;
+
+// Simple styles (can replace later)
+const styles = {
+  topbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "10px 20px",
+    background: "#1e293b",
+    color: "white",
+  },
+  right: {
+    display: "flex",
+    alignItems: "center",
+    gap: "15px",
+  },
+  role: {
+    fontSize: "14px",
+    color: "#94a3b8",
+  },
+  logoutBtn: {
+    padding: "6px 12px",
+    background: "#ef4444",
+    border: "none",
+    borderRadius: "5px",
+    color: "white",
+    cursor: "pointer",
+  },
+};
